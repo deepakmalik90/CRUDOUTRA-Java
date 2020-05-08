@@ -1,6 +1,6 @@
 # CRUDOUTRA - Java
 
-**Written in core Java, No framework or other third party tool used**
+**Written in core Java, no framework or third party ilbrary is used**
 ================================================================
 
 A very simple application for CRUD operations using the REST API.  
