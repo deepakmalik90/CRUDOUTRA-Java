@@ -11,10 +11,10 @@ Or research, study and learning purpose.
 
 ## Prerequisite 
 
-- Tomcat 9 <I build this on version 9 but you can try other versions>
-- Oracle <Or you can use your own db and change DB.java accordingly>
-- ojdbc8.jar <If you are using Oracle>
-- servlet-api.jar <Put this 2 jars in your lib folder>
+- Tomcat 9 < I build this on version 9 but you can try other versions >
+- Oracle < Or you can use your own db and change DB.java accordingly >
+- ojdbc8.jar < If you are using Oracle >
+- servlet-api.jar < Put this 2 jars in your lib folder >
 
 
 ## How To Compile
@@ -26,6 +26,6 @@ Or where tomcat can load them.
 
 
 ## Developed On 
-Window 10
-Visual Studio Code <1.47.1> 
-JDK 1.8 <1.8.0_251>
+- Window 10
+- Visual Studio Code < 1.47.1 > 
+- JDK 1.8 < 1.8.0_251 >
