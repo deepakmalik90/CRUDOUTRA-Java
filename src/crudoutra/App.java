@@ -39,10 +39,3 @@ public class App extends HttpServlet
         helper.setResponse(response, content);
     }
 }
-
-// ToDo :-
-// User get, add, update, remove
-// Decoupled login system
-// Permissions System
-// Route System
-// Proper error logs
