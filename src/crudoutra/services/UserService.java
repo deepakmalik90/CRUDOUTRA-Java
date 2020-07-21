@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import crudoutra.dao.UserDao;
 import crudoutra.models.User;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class UserService 
 {
     private UserDao userDao;
@@ -47,6 +49,21 @@ public class UserService
             e.printStackTrace();
         }
         return user;
+    }
+
+    public boolean save(HttpServletRequest request)
+    {
+        return true;
+    }
+
+    public boolean update(HttpServletRequest request)
+    {
+        return true;
+    }
+
+    public boolean delete(HttpServletRequest request)
+    {
+        return true;
     }
  
 }

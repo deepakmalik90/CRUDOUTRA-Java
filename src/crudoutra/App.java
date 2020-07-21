@@ -7,35 +7,36 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
 import crudoutra.controllers.UserController;
-import crudoutra.system.Helper;
 
 @WebServlet("/")
 public class App extends HttpServlet
 {
     static final long serialVersionUID  =   1L;
-    private Helper helper = new Helper();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException
     {
-        String content = new UserController(request,response).contents();
-        helper.setResponse(response, content);
+        new UserController(request,response).get();
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException
     {
-        String content = new UserController(request,response).contents();
-        helper.setResponse(response, content);
+        new UserController(request,response).update();
     }
 
     public void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException
     {
-        String content = new UserController(request,response).contents();
-        helper.setResponse(response, content);
+        new UserController(request,response).save();
     }
 
     public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException
     {
-        String content = new UserController(request,response).contents();
-        helper.setResponse(response, content);
+        new UserController(request,response).delete();
     }
 }
+
+// ToDo :-
+// User get, add, update, remove
+// Decoupled login system
+// Permissions System
+// Route System
+// Proper error logs

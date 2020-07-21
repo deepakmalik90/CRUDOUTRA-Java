@@ -7,29 +7,53 @@ import javax.servlet.http.HttpServletResponse;
 
 import crudoutra.models.User;
 import crudoutra.services.UserService;
+import crudoutra.system.Helper;
 
 public class UserController 
 {
-    private String content = "";
+    private HttpServletRequest request;
+    private HttpServletResponse response;
+    private Helper helper = new Helper();
+    private UserService userService =   new UserService();
 
-    public UserController(HttpServletRequest request, HttpServletResponse response)
+    private String id;
+
+    public UserController(HttpServletRequest req,HttpServletResponse res)
     {
-        UserService userService =   new UserService();
-        String id  = request.getParameter("id");
+        request     =   req;
+        response    =   res;
+    }
+
+    public void get()
+    {
+        id          =   request.getParameter("id");
         if(id==null)
         {
             ArrayList<User> users = userService.getAll(); 
-            content =  users.toString();           
+            helper.setResponse(response, users.toString());
         }
         else 
         {
             User  user = userService.get(id);
-            content = user.toString();           
+            helper.setResponse(response, user.toString());
         }
     }
 
-    public String contents()
+    public void save()
     {
-        return content;
+        userService.save(request);
+        helper.setResponse(response, "Saved");
+    }
+
+    public void update()
+    {
+        userService.update(request);
+        helper.setResponse(response, "Updated");
+    }
+
+    public void delete()
+    {
+        userService.delete(request);
+        helper.setResponse(response, "Deleted");
     }
 }
