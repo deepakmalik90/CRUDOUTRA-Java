@@ -21,9 +21,9 @@ public class UserDao extends DB
         while (resultSet.next()) 
         {
             User user = new User();
-            user.setId(resultSet.getInt("id"));
+            user.setId(resultSet.getString("id"));
             user.setName(resultSet.getString("name"));
-            user.setAge(resultSet.getInt("age"));
+            user.setAge(resultSet.getString("age"));
             users.add(user);
         }
         close();
@@ -37,9 +37,9 @@ public class UserDao extends DB
         ResultSet resultSet =  query("SELECT * FROM users WHERE id="+id);
         while (resultSet.next()) 
         {
-            user.setId(resultSet.getInt("id"));
+            user.setId(resultSet.getString("id"));
             user.setName(resultSet.getString("name"));
-            user.setAge(resultSet.getInt("age"));
+            user.setAge(resultSet.getString("age"));
         }
         close();      
         return user;

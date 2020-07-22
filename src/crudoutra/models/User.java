@@ -2,11 +2,11 @@ package crudoutra.models;
 
 public class User
 {
-    private int id;
+    private String id;
     private String name;
-    private int age;
+    private String age;
 
-    public int getId()
+    public String getId()
     {
         return id;
     }
@@ -16,12 +16,12 @@ public class User
         return name;
     }
 
-    public int getAge()
+    public String getAge()
     {
         return age;
     }
 
-    public void setId(int id)
+    public void setId(String id)
     {
         this.id = id;
     }
@@ -31,9 +31,13 @@ public class User
         this.name = name;
     }
 
-    public void setAge(int age)
+    public void setAge(String age)
     {
         this.age = age;
     }
 
+    public String toString()
+    {
+        return "{id:"+getId()+",age:"+getAge()+",name:"+getName()+"}";
+    }
 }

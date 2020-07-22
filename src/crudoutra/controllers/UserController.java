@@ -1,6 +1,7 @@
 package crudoutra.controllers;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,49 +12,62 @@ import crudoutra.system.Helper;
 
 public class UserController 
 {
-    private HttpServletRequest request;
     private HttpServletResponse response;
+    private User user = new User();    
+
     private Helper helper = new Helper();
-    private UserService userService =   new UserService();
+    private UserService userService = new UserService();
 
-    private String id;
-
-    public UserController(HttpServletRequest req,HttpServletResponse res)
+    public UserController(HttpServletRequest req, HttpServletResponse res) 
     {
-        request     =   req;
         response    =   res;
+        Map<String, String[]> params      =   req.getParameterMap();
+        
+        if(params.containsKey("id"))
+            user.setId(params.get("id")[0]);
+        else     
+            user.setId("");
+        
+        if(params.containsKey("age"))
+            user.setAge(params.get("age")[0]);
+        else     
+            user.setAge("");
+        
+        if(params.containsKey("name"))
+            user.setName(params.get("name")[0]);
+        else     
+            user.setName("");
     }
 
-    public void get()
+    public void get() 
     {
-        id          =   request.getParameter("id");
-        if(id==null)
+        if (user.getId()=="") 
         {
-            ArrayList<User> users = userService.getAll(); 
+            ArrayList<User> users = userService.getAll();
             helper.setResponse(response, users.toString());
-        }
+        } 
         else 
         {
-            User  user = userService.get(id);
-            helper.setResponse(response, user.toString());
+            User u = userService.get(user.getId());
+            helper.setResponse(response, u.toString());
         }
     }
 
     public void save()
     {
-        userService.save(request);
+        userService.save(user);
         helper.setResponse(response, "Saved");
     }
 
     public void update()
     {
-        userService.update(request);
+        userService.update(user);
         helper.setResponse(response, "Updated");
     }
 
     public void delete()
     {
-        userService.delete(request);
+        userService.delete(user);
         helper.setResponse(response, "Deleted");
     }
 }

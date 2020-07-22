@@ -35,7 +35,6 @@ public class App extends HttpServlet
 }
 
 // ToDo :-
-// User get, add, update, remove
 // Decoupled login system
 // Permissions System
 // Route System
