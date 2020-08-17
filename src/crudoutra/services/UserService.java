@@ -51,16 +51,40 @@ public class UserService
 
     public boolean save(User user)
     {
+        try 
+        {
+            userDao.save(user);
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
         return true;
     }
 
     public boolean update(User user)
     {
+        try 
+        {
+            userDao.update(user);
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
         return true;
     }
 
     public boolean delete(User user)
     {
+        try 
+        {
+            userDao.delete(user);
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
         return true;
     }
  

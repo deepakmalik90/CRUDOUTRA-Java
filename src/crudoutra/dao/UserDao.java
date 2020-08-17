@@ -44,4 +44,32 @@ public class UserDao extends DB
         close();      
         return user;
     }
+
+    public void save(User user) throws Exception
+    {
+        String id   =   user.getId();
+        String name =   user.getName();
+        String age  =   user.getAge();
+        connect();
+        excute("INSERT INTO users(id,name,age) values("+id+",'"+name+"',"+age+")");
+        close();      
+    }
+
+    public void update(User user) throws Exception
+    {
+        String id   =   user.getId();
+        String name =   user.getName();
+        String age  =   user.getAge();
+        connect();
+        excute("UPDATE users SET id="+id+", name='"+name+"', age="+age);
+        close();      
+    }
+
+    public void delete(User user) throws Exception
+    {
+        String id   =   user.getId();
+        connect();
+        excute("DELETE FROM users WHERE id="+id);
+        close();      
+    }
 }

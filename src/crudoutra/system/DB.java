@@ -50,4 +50,11 @@ public class DB
         resultSet = statement.executeQuery(query);
         return resultSet;
     }
+
+    public int  excute(String query) throws Exception
+    {
+        Statement statement = conn.createStatement();
+        return statement.executeUpdate(query);
+    }
+   
 }

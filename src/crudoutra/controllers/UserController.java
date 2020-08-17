@@ -21,20 +21,20 @@ public class UserController
     public UserController(HttpServletRequest req, HttpServletResponse res) 
     {
         response    =   res;
-        Map<String, String[]> params      =   req.getParameterMap();
+        Map<String, String> request      =   helper.parseRequest(req);
         
-        if(params.containsKey("id"))
-            user.setId(params.get("id")[0]);
+        if(request.containsKey("id"))
+            user.setId(request.get("id"));
         else     
             user.setId("");
         
-        if(params.containsKey("age"))
-            user.setAge(params.get("age")[0]);
+        if(request.containsKey("age"))
+            user.setAge(request.get("age"));
         else     
             user.setAge("");
         
-        if(params.containsKey("name"))
-            user.setName(params.get("name")[0]);
+        if(request.containsKey("name"))
+            user.setName(request.get("name"));
         else     
             user.setName("");
     }
