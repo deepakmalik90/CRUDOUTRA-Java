@@ -34,3 +34,8 @@ public class App extends HttpServlet
     }
 }
 
+// ToDo :-
+// Decoupled login system
+// Permissions System
+// Route System
+// Proper status errors
