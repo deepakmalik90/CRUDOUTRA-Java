@@ -41,8 +41,9 @@ public class Helper extends HttpServlet
             requestData         =   requestData.replace("{","");
             requestData         =   requestData.trim();
             requestData         =   requestData.replace("}","");
+            requestData         =   requestData.trim();
             String[] arrOfStr   =   requestData.split(",", 0); 
-            if(arrOfStr.length>1 || arrOfStr[0]!="")
+            if(arrOfStr.length>1 || !arrOfStr[0].isEmpty())
             {
                 for (String string : arrOfStr) 
                 {
