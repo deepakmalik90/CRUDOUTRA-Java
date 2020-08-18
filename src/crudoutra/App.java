@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
-import crudoutra.controllers.UserController;
+import crudoutra.system.Route;
 
 @WebServlet("/")
 public class App extends HttpServlet
@@ -15,27 +15,27 @@ public class App extends HttpServlet
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException
     {
-        new UserController(request,response).get();
+        new Route(request,response).processGet();
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException
     {
-        new UserController(request,response).update();
+        new Route(request,response).processPost();
     }
 
     public void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException
     {
-        new UserController(request,response).save();
+        new Route(request,response).processPut();
     }
 
     public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException
     {
-        new UserController(request,response).delete();
+        new Route(request,response).processDelete();
     }
 }
 
 // ToDo :-
 // Decoupled login system
 // Permissions System
-// Route System
 // Proper status errors
+// serialVersionUID AS constant
