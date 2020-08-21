@@ -15,26 +15,27 @@ public class App extends HttpServlet
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException
     {
-        new Route(request,response).processRoute();
+        new Route(request,response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException
     {
-        new Route(request,response).processRoute();
+        new Route(request,response);
     }
 
     public void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException
     {
-        new Route(request,response).processRoute();
+        new Route(request,response);
     }
 
     public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException
     {
-        new Route(request,response).processRoute();
+        new Route(request,response);
     }
 }
 
 // ToDo :-
+// Route as base class
 // Decoupled login system
 // Permissions System
 // Proper status errors
