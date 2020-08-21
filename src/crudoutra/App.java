@@ -15,22 +15,22 @@ public class App extends HttpServlet
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException
     {
-        new Route(request,response).processGet();
+        new Route(request,response).processRoute();
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException
     {
-        new Route(request,response).processPost();
+        new Route(request,response).processRoute();
     }
 
     public void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException
     {
-        new Route(request,response).processPut();
+        new Route(request,response).processRoute();
     }
 
     public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException
     {
-        new Route(request,response).processDelete();
+        new Route(request,response).processRoute();
     }
 }
 

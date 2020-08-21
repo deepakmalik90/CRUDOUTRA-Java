@@ -7,31 +7,56 @@ import crudoutra.controllers.UserController;
 
 public class Route
 {
-    private UserController userController;
+    private HttpServletRequest httpServletRequest;
+    private HttpServletResponse httpServletResponse;
+
+    private Controller controller;
+    private String path;
+    private String method;
 
     public Route(HttpServletRequest request, HttpServletResponse response)
     {
-        userController = new UserController(request,response);
+        httpServletRequest      =   request;
+        httpServletResponse     =   response;
+        path             =   request.getPathInfo();
+        method           =   request.getMethod();
     }
 
-    public void processGet()
+    public void processRoute()
     {
-        userController.get();
+        switch(path)
+        {
+            case "user" :
+                controller     =   new UserController();
+            break;
+
+            default:
+                System.out.println(path);
+        }
+
+        controller.init(httpServletRequest,httpServletResponse);
+        processMethod(controller);
     }
 
-    public void processPost()
+    private <Genric extends Controller> void processMethod(Genric controller)
     {
-        userController.update();
-    }
-
-    public void processPut()
-    {
-        userController.save();
-    }
-
-    public void processDelete()
-    {
-        userController.delete();
+        switch(method)
+        {
+            case "GET" :
+                controller.get();
+            break;
+            case "POST" :
+                controller.post();
+            break;
+            case "DELETE" :
+                controller.delete();
+            break;
+            case "PUT" :
+                controller.put();
+            break;
+            default:
+                System.out.println(path);
+        }
     }
 }
 

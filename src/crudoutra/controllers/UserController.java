@@ -3,26 +3,17 @@ package crudoutra.controllers;
 import java.util.ArrayList;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import crudoutra.models.User;
 import crudoutra.services.UserService;
-import crudoutra.system.Helper;
+import crudoutra.system.Controller;
 
-public class UserController 
+public class UserController extends Controller
 {
-    private HttpServletResponse response;
-    private User user = new User();    
-
-    private Helper helper = new Helper();
+    private User user               = new User();    
     private UserService userService = new UserService();
 
-    public UserController(HttpServletRequest req, HttpServletResponse res) 
+    public void setup(Map<String, String> request) 
     {
-        response    =   res;
-        Map<String, String> request      =   helper.parseRequest(req);
-        
         if(request.containsKey("id"))
             user.setId(request.get("id"));
         else     
@@ -44,30 +35,30 @@ public class UserController
         if (user.getId()=="") 
         {
             ArrayList<User> users = userService.getAll();
-            helper.setResponse(response, users.toString());
+            response(users.toString());
         } 
         else 
         {
             User u = userService.get(user.getId());
-            helper.setResponse(response, u.toString());
+            response(u.toString());
         }
     }
 
-    public void save()
+    public void post()
     {
         userService.save(user);
-        helper.setResponse(response, "Saved");
+        response( "Saved");
     }
 
-    public void update()
+    public void put()
     {
         userService.update(user);
-        helper.setResponse(response, "Updated");
+        response("Updated");
     }
 
     public void delete()
     {
         userService.delete(user);
-        helper.setResponse(response, "Deleted");
+        response("Deleted");
     }
 }
