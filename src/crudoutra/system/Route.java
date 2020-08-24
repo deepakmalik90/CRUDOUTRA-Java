@@ -1,24 +1,67 @@
 package crudoutra.system;
 
-import java.util.HashMap;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Route extends RouteBase
+public class Route extends crudoutra.config.Route
 {
-    HashMap<String, String> routes = new HashMap<String, String>();
-    
-    public Route(HttpServletRequest request, HttpServletResponse response)
+    HttpServletRequest httpServletRequest;
+    HttpServletResponse httpServletResponse;
+
+    Controller controller;
+    String path;
+    String method;
+
+    public Route(HttpServletRequest request, HttpServletResponse response) 
     {
-        super(request, response);
+        httpServletRequest  =   request;
+        httpServletResponse =   response;
+        path                =   request.getServletPath();
+        method              =   request.getMethod();
         setRoutes();
-        processRoute(routes);
+        processRoute();
     }
 
-    void setRoutes()
+    void processRoute() 
     {
-        routes.put("/user", "crudoutra.controllers.UserController");
+        if (routes.containsKey(path)) 
+        {
+            try 
+            {
+                controller  =   (Controller) Class.forName(routes.get(path)).getDeclaredConstructor().newInstance();
+            } 
+            catch (Exception e) 
+            {
+                e.printStackTrace();
+            }
+            controller.init(httpServletRequest,httpServletResponse);
+            processMethod(controller);
+        }
+        else 
+        {
+            System.out.println(path);
+        }
+    }
+
+    <Genric extends Controller> void processMethod(Genric controller)
+    {
+        switch(method)
+        {
+            case "GET" :
+                controller.get();
+            break;
+            case "POST" :
+                controller.post();
+            break;
+            case "DELETE" :
+                controller.delete();
+            break;
+            case "PUT" :
+                controller.put();
+            break;
+            default:
+                System.out.println(method);
+        }
     }
 }
 

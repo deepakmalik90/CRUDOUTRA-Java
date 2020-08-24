@@ -1,4 +1,5 @@
 src\crudoutra\App.java
+src\crudoutra\config\Route.java
 src\crudoutra\system\DB.java
 src\crudoutra\system\Helper.java
 src\crudoutra\system\Route.java
