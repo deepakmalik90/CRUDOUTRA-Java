@@ -61,7 +61,7 @@ public class UserDao extends DB
         String name =   user.getName();
         String age  =   user.getAge();
         connect();
-        excute("UPDATE users SET id="+id+", name='"+name+"', age="+age);
+        excute("UPDATE users SET name='"+name+"', age="+age+" WHERE id="+id);
         close();      
     }
 

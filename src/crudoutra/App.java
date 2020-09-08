@@ -35,8 +35,7 @@ public class App extends HttpServlet
 }
 
 // ToDo :-
-// Route as base class
+// Proper status errors
+// Validate Inputs
 // Decoupled login system
 // Permissions System
-// Proper status errors
-// serialVersionUID AS constant

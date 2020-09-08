@@ -46,14 +46,14 @@ public class UserController extends Controller
 
     public void post()
     {
-        userService.save(user);
-        response( "Saved");
+        userService.update(user);
+        response("Updated");
     }
 
     public void put()
     {
-        userService.update(user);
-        response("Updated");
+        userService.save(user);
+        response( "Saved");
     }
 
     public void delete()

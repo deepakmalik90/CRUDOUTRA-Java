@@ -47,7 +47,8 @@ public class Helper extends HttpServlet
                 for (String string : arrOfStr) 
                 {
                     string              =   string.trim();
-                    json.put(string.split(":",0)[0].replaceAll("\"", "").trim(),string.split(":",0)[1].replaceAll("\"", "").trim());
+                    if(!string.isBlank())
+                        json.put(string.split(":",0)[0].replaceAll("\"", "").trim(),string.split(":",0)[1].replaceAll("\"", "").trim());
                 }
             }
         } 

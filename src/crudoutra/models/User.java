@@ -38,6 +38,6 @@ public class User
 
     public String toString()
     {
-        return "{id:"+getId()+",age:"+getAge()+",name:"+getName()+"}";
+        return "{\"id\":"+getId()+",\"age\":"+getAge()+",\"name\":"+getName()+"}";
     }
 }
