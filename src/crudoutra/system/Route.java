@@ -39,7 +39,7 @@ public class Route extends crudoutra.config.Route
         }
         else 
         {
-            System.out.println(path);
+            new Error(httpServletRequest,httpServletResponse).sendError(Error.STATUS_404);
         }
     }
 
@@ -60,7 +60,7 @@ public class Route extends crudoutra.config.Route
                 controller.put();
             break;
             default:
-                System.out.println(method);
+                new Error(httpServletRequest,httpServletResponse).sendError(Error.STATUS_405);
         }
     }
 }

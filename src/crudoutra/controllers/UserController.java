@@ -6,6 +6,7 @@ import java.util.Map;
 import crudoutra.models.User;
 import crudoutra.services.UserService;
 import crudoutra.system.Controller;
+import crudoutra.system.Error;
 
 public class UserController extends Controller
 {
@@ -46,6 +47,11 @@ public class UserController extends Controller
 
     public void post()
     {
+        if (user.getId()=="") 
+        {
+            error(Error.STATUS_422);
+        }
+
         userService.update(user);
         response("Updated");
     }
@@ -58,6 +64,10 @@ public class UserController extends Controller
 
     public void delete()
     {
+        if (user.getId()=="") 
+        {
+            error(Error.STATUS_422);
+        }
         userService.delete(user);
         response("Deleted");
     }

@@ -3,6 +3,7 @@ src\crudoutra\config\Route.java
 src\crudoutra\system\DB.java
 src\crudoutra\system\Helper.java
 src\crudoutra\system\Route.java
+src\crudoutra\system\Error.java
 src\crudoutra\system\Controller.java
 src\crudoutra\models\User.java
 src\crudoutra\controllers\UserController.java

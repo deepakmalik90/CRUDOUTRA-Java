@@ -28,6 +28,8 @@ public class Helper extends HttpServlet
             e.printStackTrace();
         }
         pw.println(message);
+        pw.flush();
+        pw.close();
     }
 
     public Map<String, String> parseRequest(HttpServletRequest request)

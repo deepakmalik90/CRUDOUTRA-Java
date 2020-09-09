@@ -7,11 +7,13 @@ import javax.servlet.http.HttpServletResponse;
 
 public abstract class Controller 
 {
+    private HttpServletRequest httpServletRequest;
     private HttpServletResponse httpServletResponse;
     private Helper helper = new Helper();
 
     public void init(HttpServletRequest request, HttpServletResponse response) 
     {
+        httpServletRequest    =   request;
         httpServletResponse    =   response;
         setup(helper.parseRequest(request));
     }
@@ -19,6 +21,16 @@ public abstract class Controller
     public void response(String response)
     {
         helper.setResponse(httpServletResponse, response);
+    }
+
+    public void error(int key)
+    {
+        new Error(httpServletRequest, httpServletResponse).sendError(key);
+    }
+
+    public void error(int key, String messgae)
+    {
+        new Error(httpServletRequest, httpServletResponse).sendError(key,messgae);
     }
 
     public abstract void setup(Map<String, String> httpServletRequest);

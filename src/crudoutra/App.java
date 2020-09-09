@@ -35,7 +35,5 @@ public class App extends HttpServlet
 }
 
 // ToDo :-
-// Proper status errors
-// Validate Inputs
 // Decoupled login system
 // Permissions System
