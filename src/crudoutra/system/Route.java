@@ -3,6 +3,8 @@ package crudoutra.system;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import crudoutra.config.Constant;
+
 public class Route extends crudoutra.config.Route
 {
     HttpServletRequest httpServletRequest;
@@ -39,7 +41,7 @@ public class Route extends crudoutra.config.Route
         }
         else 
         {
-            new Error(httpServletRequest,httpServletResponse).sendError(Error.STATUS_404);
+            new Error(httpServletRequest,httpServletResponse).sendError(Constant.STATUS_404);
         }
     }
 
@@ -60,7 +62,7 @@ public class Route extends crudoutra.config.Route
                 controller.put();
             break;
             default:
-                new Error(httpServletRequest,httpServletResponse).sendError(Error.STATUS_405);
+                new Error(httpServletRequest,httpServletResponse).sendError(Constant.STATUS_405);
         }
     }
 }

@@ -33,7 +33,3 @@ public class App extends HttpServlet
         new Route(request,response);
     }
 }
-
-// ToDo :-
-// Decoupled login system
-// Permissions System

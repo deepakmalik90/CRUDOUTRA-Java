@@ -27,5 +27,5 @@ Or where tomcat can load them.
 
 ## Developed On 
 - Window 10
-- Visual Studio Code < 1.47.1 > 
-- JDK 1.8 < 1.8.0_251 >
+- Visual Studio Code 
+- Java 11
