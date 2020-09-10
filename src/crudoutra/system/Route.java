@@ -1,3 +1,10 @@
+/*
+ *   
+ *   Author : Deepak Malik
+ *   https://github.com/devmalik19/crudoutra-java
+ *
+ */
+
 package crudoutra.system;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,21 +38,21 @@ public class Route extends crudoutra.config.Route
             try 
             {
                 controller  =   (Controller) Class.forName(routes.get(path)).getDeclaredConstructor().newInstance();
+                controller.init(httpServletRequest,httpServletResponse);
+                processMethod(controller);
             } 
             catch (Exception e) 
             {
-                e.printStackTrace();
+                new Error(httpServletResponse).sendError(Constant.STATUS_500);
             }
-            controller.init(httpServletRequest,httpServletResponse);
-            processMethod(controller);
         }
         else 
         {
-            new Error(httpServletRequest,httpServletResponse).sendError(Constant.STATUS_404);
+            new Error(httpServletResponse).sendError(Constant.STATUS_404);
         }
     }
 
-    <Genric extends Controller> void processMethod(Genric controller)
+    <Genric extends Controller> void processMethod(Genric controller) throws Exception
     {
         switch(method)
         {
@@ -62,7 +69,7 @@ public class Route extends crudoutra.config.Route
                 controller.put();
             break;
             default:
-                new Error(httpServletRequest,httpServletResponse).sendError(Constant.STATUS_405);
+                new Error(httpServletResponse).sendError(Constant.STATUS_405);
         }
     }
 }

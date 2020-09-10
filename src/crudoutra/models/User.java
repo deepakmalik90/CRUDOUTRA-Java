@@ -1,3 +1,10 @@
+/*
+ *   
+ *   Author : Deepak Malik
+ *   https://github.com/devmalik19/crudoutra-java
+ *
+ */
+
 package crudoutra.models;
 
 public class User

@@ -1,3 +1,10 @@
+/*
+ *   
+ *   Author : Deepak Malik
+ *   https://github.com/devmalik19/crudoutra-java
+ *
+ */
+
 package crudoutra.controllers;
 
 import java.util.ArrayList;
@@ -6,15 +13,17 @@ import java.util.Map;
 import crudoutra.models.User;
 import crudoutra.services.UserService;
 import crudoutra.system.Controller;
-import crudoutra.system.Error;
 
 public class UserController extends Controller
 {
-    private User user               = new User();    
-    private UserService userService = new UserService();
+    private User user;    
+    private UserService userService;
 
-    public void setup(Map<String, String> request) 
+    public void setup(Map<String, String> request) throws Exception 
     {
+        user                =       new User();    
+        userService         =       new UserService();
+
         if(request.containsKey("id"))
             user.setId(request.get("id"));
         else     
@@ -31,7 +40,7 @@ public class UserController extends Controller
             user.setName("");
     }
 
-    public void get() 
+    public void get() throws Exception 
     {
         if (user.getId()=="") 
         {
@@ -45,29 +54,20 @@ public class UserController extends Controller
         }
     }
 
-    public void post()
+    public void post()  throws Exception
     {
-        if (user.getId()=="") 
-        {
-            error(Error.STATUS_422);
-        }
-
         userService.update(user);
         response("Updated");
     }
 
-    public void put()
+    public void put()  throws Exception
     {
         userService.save(user);
         response( "Saved");
     }
 
-    public void delete()
+    public void delete() throws Exception
     {
-        if (user.getId()=="") 
-        {
-            error(Error.STATUS_422);
-        }
         userService.delete(user);
         response("Deleted");
     }

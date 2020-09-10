@@ -1,3 +1,10 @@
+/*
+ *   
+ *   Author : Deepak Malik
+ *   https://github.com/devmalik19/crudoutra-java
+ *
+ */
+
 package crudoutra.services;
 
 import java.util.ArrayList;
@@ -9,83 +16,47 @@ public class UserService
 {
     private UserDao userDao;
 
-    public UserService() 
+    public UserService() throws Exception
     {
-        try 
-        {
-            userDao = new UserDao();
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-        }
+        userDao = new UserDao();
     }
 
-    public ArrayList<User> getAll() 
+    public ArrayList<User> getAll()  throws Exception 
     {
         ArrayList<User> users = null;
-        try 
-        {
-            users = userDao.getAll();
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-        }
+        users = userDao.getAll();
         return users;
     }
 
-    public User get(String id) 
+    public User get(String id)   throws Exception 
     {
         User user = null;
-        try 
-        {
-            user = userDao.get(id);
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-        }
+        user = userDao.get(id);
         return user;
     }
 
-    public boolean save(User user)
+    public boolean save(User user)  throws Exception 
     {
-        try 
-        {
-            userDao.save(user);
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-        }
+        userDao.save(user);
         return true;
     }
 
-    public boolean update(User user)
+    public boolean update(User user)   throws Exception 
     {
-        try 
-        {
-            userDao.update(user);
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-        }
+        userDao.update(user);
         return true;
     }
 
-    public boolean delete(User user)
+    public boolean delete(User user)   throws Exception 
     {
-        try 
-        {
-            userDao.delete(user);
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-        }
+        userDao.delete(user);
         return true;
+    }
+
+    public boolean isValidId(String id)  throws Exception 
+    {
+        boolean response = false;
+        return response;
     }
  
 }

@@ -1,22 +1,26 @@
+/*
+ *   
+ *   Author : Deepak Malik
+ *   https://github.com/devmalik19/crudoutra-java
+ *
+ */
+
 package crudoutra.system;
 
 import java.util.HashMap;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import crudoutra.config.Constant;
 
 public class Error extends crudoutra.config.Route 
 {
-    private  HttpServletRequest httpServletRequest;
     private  HttpServletResponse httpServletResponse;
 
     private HashMap<Integer,String> errorHashMap    =   new HashMap<Integer,String>();
     private Helper helper = new Helper();
 
-    public Error(HttpServletRequest request, HttpServletResponse response) 
+    public Error(HttpServletResponse response) 
     {
-        httpServletRequest  =   request;
         httpServletResponse =   response;
         
         errorHashMap.put(Constant.STATUS_400, "{\"error\":\"Bad Request\"}");
