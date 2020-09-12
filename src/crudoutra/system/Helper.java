@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import crudoutra.config.Constant;
+import crudoutra.exceptions.*;
 
 public class Helper extends HttpServlet
 {
@@ -33,7 +34,7 @@ public class Helper extends HttpServlet
         } 
         catch (IOException e) 
         {
-            new Error(httpServletResponse).sendError(Constant.STATUS_500);
+            new Error(httpServletResponse).sendError(Constant.STATUS_500,Constant.ERROR_500);
         }
         pw.println(message);
         pw.flush();
@@ -50,11 +51,11 @@ public class Helper extends HttpServlet
         }
         catch (IOException e) 
         {
-            new Error(httpServletResponse).sendError(Constant.STATUS_500);
+            new Error(httpServletResponse).sendError(Constant.STATUS_500,Constant.ERROR_500);
         }
-        catch (Exception e) 
+        catch (InvalidDataException e) 
         {
-            new Error(httpServletResponse).sendError(Constant.STATUS_422);
+            new Error(httpServletResponse).sendError(Constant.STATUS_422,Constant.ERROR_422);
         }
         return  json;
     }
@@ -70,7 +71,7 @@ public class Helper extends HttpServlet
      * @throws Exception
      */
 
-    public Map<String, String> parseJSON(String str) throws Exception
+    public Map<String, String> parseJSON(String str) throws InvalidDataException
     {
         Map<String, String> json = new HashMap<String, String>();
         str         =   str.trim();

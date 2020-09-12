@@ -15,5 +15,15 @@ public class Constant
     public static final int STATUS_405 = 405;
     public static final int STATUS_422 = 422;
     public static final int STATUS_500 = 500;
+
+    
+    public static final String ERROR_404                =   "Wrong Endpoint";
+    public static final String ERROR_405                =   "Wrong Method";
+    public static final String ERROR_422                =   "Invalid JSON";
+    public static final String ERROR_500                =   "Internal Server Error";
+    public static final String ERROR_DB_CONNECTION      =   "Database Connection Error";
+    public static final String ERROR_DB                 =   "Database Error";
+    public static final String ERROR_INVALID_DATA       =   "Input Error";
+
 }
 
