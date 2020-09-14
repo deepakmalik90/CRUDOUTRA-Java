@@ -7,6 +7,8 @@
 
  package crudoutra.exceptions;
 
+import crudoutra.config.Constant;
+
 public class InvalidDataException extends Exception 
 {
     /**
@@ -17,6 +19,11 @@ public class InvalidDataException extends Exception
     public InvalidDataException(String errorMessage) 
     {
         super(errorMessage);
+    }
+
+    public InvalidDataException() 
+    {
+        super(Constant.ERROR_422);
     }
     
 }

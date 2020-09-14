@@ -5,27 +5,25 @@
  *
  */
 
-package crudoutra.exceptions;
-
-import java.sql.SQLException;
+ package crudoutra.exceptions;
 
 import crudoutra.config.Constant;
 
-public class DatabaseException extends SQLException
+public class InvalidJSONException extends Exception 
 {
-
     /**
      *
      */
     private static final long serialVersionUID = 1L;
-    
-    public DatabaseException(String errorMessage) 
+
+    public InvalidJSONException(String errorMessage) 
     {
         super(errorMessage);
     }
 
-    public DatabaseException() 
+    public InvalidJSONException() 
     {
-        super(Constant.ERROR_DB);
+        super(Constant.ERROR_400);
     }
-}    
+    
+}

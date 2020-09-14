@@ -9,15 +9,23 @@ package crudoutra.exceptions;
 
 import java.sql.SQLException;
 
-public class DatabaseConnectionException extends SQLException {
+import crudoutra.config.Constant;
+
+public class DatabaseConnectionException extends SQLException 
+{
 
     /**
      *
      */
     private static final long serialVersionUID = 1L;
 
+    public DatabaseConnectionException(String errorMessage) 
+    {
+        super(errorMessage);
+    }
+
     public DatabaseConnectionException() 
     {
-        super("Database Connection Error!");
+        super(Constant.ERROR_DB_CONNECTION);
     }
 }    
