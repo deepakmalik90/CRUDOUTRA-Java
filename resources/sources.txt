@@ -6,9 +6,11 @@ src\crudoutra\system\Helper.java
 src\crudoutra\system\Route.java
 src\crudoutra\system\Error.java
 src\crudoutra\system\Controller.java
+src\crudoutra\system\Table.java
 src\crudoutra\models\User.java
 src\crudoutra\controllers\UserController.java
 src\crudoutra\services\UserService.java
 src\crudoutra\dao\UserDao.java
+src\crudoutra\exceptions\DatabaseConnectionException.java
 src\crudoutra\exceptions\DatabaseException.java
-src\crudoutra\exceptions\InputDataException.java
+src\crudoutra\exceptions\InvalidDataException.java

@@ -49,14 +49,15 @@ public class Helper extends HttpServlet
             String requestData   =   request.getReader().lines().collect(Collectors.joining());
             json                =   parseJSON(requestData);
         }
-        catch (IOException e) 
-        {
-            new Error(httpServletResponse).sendError(Constant.STATUS_500,Constant.ERROR_500);
-        }
         catch (InvalidDataException e) 
         {
             new Error(httpServletResponse).sendError(Constant.STATUS_422,Constant.ERROR_422);
         }
+        catch (IOException e) 
+        {
+            new Error(httpServletResponse).sendError(Constant.STATUS_500,Constant.ERROR_500);
+        }
+
         return  json;
     }
 
@@ -73,21 +74,28 @@ public class Helper extends HttpServlet
 
     public Map<String, String> parseJSON(String str) throws InvalidDataException
     {
-        Map<String, String> json = new HashMap<String, String>();
-        str         =   str.trim();
-        str         =   str.replace("{","");
-        str         =   str.trim();
-        str         =   str.replace("}","");
-        String[] arrOfStr   =   str.split(",", 0); 
-        if(arrOfStr.length>1 || arrOfStr[0]!="")
+        try 
         {
-            for (String string : arrOfStr) 
+            Map<String, String> json = new HashMap<String, String>();
+            str         =   str.trim();
+            str         =   str.replace("{","");
+            str         =   str.trim();
+            str         =   str.replace("}","");
+            String[] arrOfStr   =   str.split(",", 0); 
+            if(arrOfStr.length>1 || arrOfStr[0]!="")
             {
-                string              =   string.trim();
-                if(!string.isBlank())
-                    json.put(string.split(":",0)[0].replaceAll("\"", "").trim(),string.split(":",0)[1].replaceAll("\"", "").trim());
+                for (String string : arrOfStr) 
+                {
+                    string              =   string.trim();
+                    if(!string.isBlank())
+                        json.put(string.split(":",0)[0].replaceAll("\"", "").trim(),string.split(":",0)[1].replaceAll("\"", "").trim());
+                }
             }
+            return json;
         }
-        return json;
+        catch(Exception e)
+        {
+            throw new InvalidDataException(e.getMessage());
+        }
     }
 }

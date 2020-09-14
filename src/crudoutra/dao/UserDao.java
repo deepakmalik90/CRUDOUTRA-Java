@@ -7,32 +7,36 @@
 
 package crudoutra.dao;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import crudoutra.system.DB;
+import crudoutra.system.Table;
 import crudoutra.models.User;
 
 public class UserDao extends DB
 {
-    public UserDao() throws Exception 
+    public UserDao() throws Exception
     {
         super();
     }
 
-    public ArrayList<User> getAll() throws Exception
+    public ArrayList<User> getAll() throws  Exception
     {
+        
         ArrayList<User> users = new ArrayList<User>();
         connect();
-        ResultSet resultSet =  query("SELECT * FROM users");
-        while (resultSet.next()) 
+        Table   table   =  query("SELECT * FROM users");
+
+        for (HashMap<String,String> row : table.rows) 
         {
             User user = new User();
-            user.setId(resultSet.getString("id"));
-            user.setName(resultSet.getString("name"));
-            user.setAge(resultSet.getString("age"));
+            user.setId(row.get("id"));
+            user.setName(row.get("name"));
+            user.setAge(row.get("age"));
             users.add(user);
         }
+
         close();
         return users;
     }
@@ -41,18 +45,18 @@ public class UserDao extends DB
     {
         User user = new User();
         connect();
-        ResultSet resultSet =  query("SELECT * FROM users WHERE id="+id);
-        while (resultSet.next()) 
-        {
-            user.setId(resultSet.getString("id"));
-            user.setName(resultSet.getString("name"));
-            user.setAge(resultSet.getString("age"));
-        }
+        Table   table   =   query("SELECT * FROM users WHERE id="+id);
+        HashMap<String,String> row    =   table.row;
+        
+        user.setId(row.get("id"));
+        user.setName(row.get("name"));
+        user.setAge(row.get("age"));
+        
         close();      
         return user;
     }
 
-    public void save(User user) throws Exception
+    public void save(User user) throws  Exception
     {
         String id   =   user.getId();
         String name =   user.getName();
@@ -62,7 +66,7 @@ public class UserDao extends DB
         close();      
     }
 
-    public void update(User user) throws Exception
+    public void update(User user) throws  Exception
     {
         String id   =   user.getId();
         String name =   user.getName();
@@ -72,7 +76,7 @@ public class UserDao extends DB
         close();      
     }
 
-    public void delete(User user) throws Exception
+    public void delete(User user) throws  Exception
     {
         String id   =   user.getId();
         connect();
