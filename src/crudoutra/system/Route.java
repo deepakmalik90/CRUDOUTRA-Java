@@ -52,11 +52,11 @@ public class Route extends crudoutra.config.Route
             }
             catch(DatabaseConnectionException e) 
             {
-                new Error(httpServletResponse).sendError(e,Constant.STATUS_500);
+                new Error(httpServletResponse).sendError(e,Constant.STATUS_500,Constant.ERROR_DB_CONNECTION);
             }
             catch(DatabaseException e) 
             {
-                new Error(httpServletResponse).sendError(e,Constant.STATUS_500);
+                new Error(httpServletResponse).sendError(e,Constant.STATUS_500,Constant.ERROR_DB);
             }
             catch (Exception e) 
             {
