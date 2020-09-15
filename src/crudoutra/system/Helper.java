@@ -34,7 +34,7 @@ public class Helper extends HttpServlet
         } 
         catch (IOException e) 
         {
-            new Error(httpServletResponse).sendError(Constant.STATUS_500,Constant.ERROR_500);
+            new Error(httpServletResponse).sendError(e,Constant.STATUS_500);
         }
         pw.println(message);
         pw.flush();
@@ -49,13 +49,13 @@ public class Helper extends HttpServlet
             String requestData   =   request.getReader().lines().collect(Collectors.joining());
             json                =   parseJSON(requestData);
         }
-        catch (InvalidDataException e) 
+        catch (InvalidInputException e) 
         {
-            new Error(httpServletResponse).sendError(Constant.STATUS_422,Constant.ERROR_422);
+            new Error(httpServletResponse).sendError(e,Constant.STATUS_422);
         }
         catch (IOException e) 
         {
-            new Error(httpServletResponse).sendError(Constant.STATUS_500,Constant.ERROR_500);
+            new Error(httpServletResponse).sendError(e,Constant.STATUS_500);
         }
 
         return  json;
@@ -72,7 +72,7 @@ public class Helper extends HttpServlet
      * @throws Exception
      */
 
-    public Map<String, String> parseJSON(String str) throws InvalidDataException
+    public Map<String, String> parseJSON(String str) throws InvalidInputException
     {
         try 
         {
@@ -95,7 +95,7 @@ public class Helper extends HttpServlet
         }
         catch(Exception e)
         {
-            throw new InvalidDataException(e.getMessage());
+            throw new InvalidInputException(e.getMessage());
         }
     }
 }

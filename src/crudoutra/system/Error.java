@@ -7,7 +7,6 @@
 
 package crudoutra.system;
 
-import java.util.HashMap;
 import javax.servlet.http.HttpServletResponse;
 
 import crudoutra.config.Constant;
@@ -15,32 +14,33 @@ import crudoutra.config.Constant;
 public class Error extends crudoutra.config.Route 
 {
     private  HttpServletResponse httpServletResponse;
-
-    private HashMap<Integer,String> errorHashMap    =   new HashMap<Integer,String>();
     private Helper helper = new Helper();
 
     public Error(HttpServletResponse response) 
     {
         httpServletResponse =   response;
-        
-        errorHashMap.put(Constant.STATUS_400, "{\"error\":\"Bad Request\"}");
-        errorHashMap.put(Constant.STATUS_403, "{\"error\":\"Permission Denied\"}");
-        errorHashMap.put(Constant.STATUS_404, "{\"error\":\"Invalid Path\"}");
-        errorHashMap.put(Constant.STATUS_405, "{\"error\":\"Invalid Method\"}");
-        errorHashMap.put(Constant.STATUS_422, "{\"error\":\"Invalid Data\"}");
-        errorHashMap.put(Constant.STATUS_500, "{\"error\":\"Internal Server Error\"}");
     }
 
-    void sendError(int key) 
+    void sendError(Exception e, int status) 
     {
-        httpServletResponse.setStatus(key);
-        helper.setResponse(httpServletResponse, errorHashMap.get(key));
+        httpServletResponse.setStatus(status);
+        helper.setResponse(httpServletResponse, Constant.ERROR_RESPONSE.get(status));
+        log(e);
     }
 
-    void sendError(int key,String customErrorMessage) 
+    void sendError(Exception e, int status, String customErrorMessage) 
     {
-        httpServletResponse.setStatus(key);
-        helper.setResponse(httpServletResponse, "{\"error\":\""+customErrorMessage+"\"}");
+        httpServletResponse.setStatus(status);
+        helper.setResponse(httpServletResponse, Constant.errorResponse(customErrorMessage));
+        log(e);
+    }
+
+    /**
+     *  Override this function to use your own log functionalty or third party library 
+     */
+    void log(Exception e)
+    {
+        e.printStackTrace();
     }
 }
 

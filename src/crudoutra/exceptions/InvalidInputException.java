@@ -9,19 +9,19 @@
 
 import crudoutra.config.Constant;
 
-public class InvalidJSONException extends Exception 
+public class InvalidInputException extends Exception 
 {
     /**
      *
      */
     private static final long serialVersionUID = 1L;
 
-    public InvalidJSONException(String errorMessage) 
+    public InvalidInputException(String errorMessage) 
     {
         super(errorMessage);
     }
 
-    public InvalidJSONException() 
+    public InvalidInputException() 
     {
         super(Constant.ERROR_400);
     }

@@ -44,24 +44,28 @@ public class Route extends crudoutra.config.Route
             }
             catch(InvalidDataException e) 
             {
-                new Error(httpServletResponse).sendError(Constant.STATUS_422,e.getMessage());
+                new Error(httpServletResponse).sendError(e,Constant.STATUS_422,e.getMessage());
+            }
+            catch(InvalidInputException e) 
+            {
+                new Error(httpServletResponse).sendError(e,Constant.STATUS_400);
             }
             catch(DatabaseConnectionException e) 
             {
-                new Error(httpServletResponse).sendError(Constant.STATUS_500,Constant.ERROR_DB_CONNECTION);
+                new Error(httpServletResponse).sendError(e,Constant.STATUS_500);
             }
             catch(DatabaseException e) 
             {
-                new Error(httpServletResponse).sendError(Constant.STATUS_500,Constant.ERROR_DB);
+                new Error(httpServletResponse).sendError(e,Constant.STATUS_500);
             }
             catch (Exception e) 
             {
-                new Error(httpServletResponse).sendError(Constant.STATUS_500,Constant.ERROR_500);
+                new Error(httpServletResponse).sendError(e,Constant.STATUS_500);
             }
         }
         else 
         {
-            new Error(httpServletResponse).sendError(Constant.STATUS_404,Constant.ERROR_404);
+            new Error(httpServletResponse).sendError(new Exception(),Constant.STATUS_404);
         }
     }
 
@@ -82,7 +86,7 @@ public class Route extends crudoutra.config.Route
                 controller.put();
             break;
             default:
-                new Error(httpServletResponse).sendError(Constant.STATUS_405,Constant.ERROR_405);
+                new Error(httpServletResponse).sendError(new Exception(),Constant.STATUS_405);
         }
     }
 }
