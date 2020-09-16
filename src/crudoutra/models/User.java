@@ -45,11 +45,11 @@ public class User
 
     public String toString()
     {
-        return "{\"id\":"+getId()+",\"age\":"+getAge()+",\"name\":"+getName()+"}";
+        return "{\"id\":\""+getId()+"\",\"age\":\""+getAge()+"\",\"name\":\""+getName()+"\"}";
     }
 
     public String toString(String customMessage)
     {
-        return "[{\"id\":"+getId()+",\"age\":"+getAge()+",\"name\":"+getName()+"},{\"message\":"+ customMessage+"}]";
+        return "[{\"id\":\""+getId()+"\",\"age\":\""+getAge()+"\",\"name\":\""+getName()+"\"},{\"message\":\""+ customMessage+"\"}]";
     }
 }

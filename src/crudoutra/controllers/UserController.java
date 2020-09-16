@@ -10,7 +10,6 @@ package crudoutra.controllers;
 import java.util.ArrayList;
 import java.util.Map;
 
-import crudoutra.config.Constant;
 import crudoutra.models.*;
 import crudoutra.services.*;
 import crudoutra.system.*;

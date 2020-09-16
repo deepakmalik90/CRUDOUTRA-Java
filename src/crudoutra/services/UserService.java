@@ -32,35 +32,33 @@ public class UserService
 
     public User get()  throws Exception 
     {
+        isValidValidUser();
         return userDao.get();
     }
 
     public User save()  throws Exception 
     {
-        isValidUpdateData();
+        isValidCreateData();
         return userDao.save();
-        
     }
 
     public User update()   throws Exception 
     {
-        isValidCreateData();
+        isValidUpdateData();
         return userDao.update();
     }
 
     public User delete()   throws Exception 
     {
-        isValidDeleteData();
+        isValidValidUser();
         return userDao.delete();
     }
 
     public void isValidUpdateData()  throws Exception 
     {
-        if(user.getId().isBlank())
-            throw new InvalidDataException("User Id is blank");
-        else if(!userDao.exist())     
-            throw new InvalidDataException("User does not exists");
-        else if(user.getAge().isBlank())     
+        isValidValidUser();
+
+        if(user.getAge().isBlank())     
             throw new InvalidDataException("User age is blank");
         else if(user.getName().isBlank())     
             throw new InvalidDataException("User name is blank");
@@ -78,7 +76,7 @@ public class UserService
             throw new InvalidDataException("User name is blank");
     }
 
-    public void isValidDeleteData()  throws Exception 
+    public void isValidValidUser()  throws Exception 
     {
         if(user.getId().isBlank())
             throw new InvalidDataException("User Id is blank");

@@ -37,6 +37,7 @@ public class Data
 
             while (resultSet.next()) 
             {
+                row       =   new HashMap<String,String>();
                 for (String colName : columns) 
                 {
                     row.put(colName,resultSet.getString(colName));
