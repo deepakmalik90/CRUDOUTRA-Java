@@ -22,6 +22,7 @@ public class LoginController extends Controller
 
     public void setup(Map<String, String> request) throws Exception 
     {
+        loginService    =   new LoginService();
     }
 
     public void post()  throws Exception
