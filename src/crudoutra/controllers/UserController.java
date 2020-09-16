@@ -10,9 +10,9 @@ package crudoutra.controllers;
 import java.util.ArrayList;
 import java.util.Map;
 
-import crudoutra.models.User;
-import crudoutra.services.UserService;
-import crudoutra.system.Controller;
+import crudoutra.models.*;
+import crudoutra.services.*;
+import crudoutra.system.*;
 
 public class UserController extends Controller
 {
@@ -22,7 +22,6 @@ public class UserController extends Controller
     public void setup(Map<String, String> request) throws Exception 
     {
         user                =       new User();    
-        userService         =       new UserService();
 
         if(request.containsKey("id"))
             user.setId(request.get("id"));
@@ -38,37 +37,40 @@ public class UserController extends Controller
             user.setName(request.get("name"));
         else     
             user.setName("");
+
+        userService         =       new UserService(user);
+
     }
 
     public void get() throws Exception 
     {
         if (user.getId()=="") 
         {
-            ArrayList<User> users = userService.getAll();
+            ArrayList<User> users = UserService.getAll();
             response(users.toString());
         } 
         else 
         {
-            User u = userService.get(user.getId());
-            response(u.toString());
+            user = userService.get();
+            response(user.toString());
         }
     }
 
     public void post()  throws Exception
     {
-        userService.update(user);
-        response("Updated");
+        user = userService.update();
+        response(user.toString("User Updated!"));
     }
 
     public void put()  throws Exception
     {
-        userService.save(user);
-        response( "Saved");
+        user = userService.save();
+        response(user.toString("New User Saved!"));
     }
 
     public void delete() throws Exception
     {
-        userService.delete(user);
-        response("Deleted");
+        user = userService.delete();
+        response(user.toString("User Deleted!"));
     }
 }

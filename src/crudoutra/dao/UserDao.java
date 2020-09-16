@@ -10,25 +10,27 @@ package crudoutra.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import crudoutra.system.DB;
-import crudoutra.system.Table;
-import crudoutra.models.User;
+import crudoutra.system.*;
+import crudoutra.models.*;
 
-public class UserDao extends DB
+public class UserDao extends DataBaseAccess
 {
-    public UserDao() throws Exception
+    private User user;
+
+    public UserDao(User user) throws Exception
     {
         super();
+        this.user   = user;
     }
 
-    public ArrayList<User> getAll() throws  Exception
+    public static ArrayList<User> getAll() throws  Exception
     {
-        
+        DataBaseAccess DB = new DataBaseAccess();
         ArrayList<User> users = new ArrayList<User>();
-        connect();
-        Table   table   =  query("SELECT * FROM users");
+        DB.connect();
+        Data   data   =  DB.query("SELECT * FROM users");
 
-        for (HashMap<String,String> row : table.rows) 
+        for (HashMap<String,String> row : data.rows) 
         {
             User user = new User();
             user.setId(row.get("id"));
@@ -37,16 +39,16 @@ public class UserDao extends DB
             users.add(user);
         }
 
-        close();
+        DB.close();
         return users;
     }
     
-    public User get(String id) throws Exception
+    public User get() throws Exception
     {
-        User user = new User();
+        String id   =   user.getId();
         connect();
-        Table   table   =   query("SELECT * FROM users WHERE id="+id);
-        HashMap<String,String> row    =   table.row;
+        Data   data   =   query("SELECT * FROM users WHERE \"id\"="+id);
+        HashMap<String,String> row    =   data.row;
         
         user.setId(row.get("id"));
         user.setName(row.get("name"));
@@ -56,31 +58,60 @@ public class UserDao extends DB
         return user;
     }
 
-    public void save(User user) throws  Exception
+    public User save() throws  Exception
     {
         String id   =   user.getId();
         String name =   user.getName();
         String age  =   user.getAge();
+
         connect();
-        excute("INSERT INTO users(id,name,age) values("+id+",'"+name+"',"+age+")");
+        excute("INSERT INTO users(\"id\",\"name\",\"age\") values("+id+",'"+name+"',"+age+")");
         close();      
+
+        user.setId(id);
+        user.setName(name);
+        user.setAge(age);
+        return user;
     }
 
-    public void update(User user) throws  Exception
+    public User update() throws  Exception
     {
         String id   =   user.getId();
         String name =   user.getName();
         String age  =   user.getAge();
+
         connect();
-        excute("UPDATE users SET name='"+name+"', age="+age+" WHERE id="+id);
+        excute("UPDATE users SET \"name\"='"+name+"', \"age\"="+age+" WHERE \"id\"="+id);
         close();      
+
+        user.setName(name);
+        user.setAge(age);
+        return user;
+
     }
 
-    public void delete(User user) throws  Exception
+    public User delete() throws  Exception
+    {
+        String id   =   user.getId();
+        
+        connect();
+        excute("DELETE FROM users WHERE \"id\"="+id);
+        close();      
+
+        return user;
+    }
+
+    public boolean exist() throws Exception
     {
         String id   =   user.getId();
         connect();
-        excute("DELETE FROM users WHERE id="+id);
-        close();      
+        Data   data   =   query("SELECT * FROM users WHERE \"id\"="+id);
+        HashMap<String,String> row    =   data.row;
+        
+        if(row.containsKey("id") && !row.get("id").isBlank())
+            return true;
+        else 
+            return false;    
+        
     }
 }

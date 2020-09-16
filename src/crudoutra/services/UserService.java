@@ -10,71 +10,78 @@ package crudoutra.services;
 import java.util.ArrayList;
 
 import crudoutra.exceptions.*;
-import crudoutra.dao.UserDao;
-import crudoutra.models.User;
+import crudoutra.dao.*;
+import crudoutra.models.*;
 
 public class UserService 
 {
     private UserDao userDao;
-
-    public UserService() throws Exception
+    private User user;
+    
+    public UserService(User user) throws Exception
     {
-        userDao = new UserDao();
+        this.user   = user;
+        userDao     = new UserDao(user);
     }
 
-    public ArrayList<User> getAll()  throws Exception 
+    public static ArrayList<User> getAll()  throws Exception 
     {
-        ArrayList<User> users = null;
-        users = userDao.getAll();
+        ArrayList<User> users = UserDao.getAll();
         return users;
     }
 
-    public User get(String id)   throws Exception 
+    public User get()  throws Exception 
     {
-        User user = null;
-        user = userDao.get(id);
-        return user;
+        isValidValidUser();
+        return userDao.get();
     }
 
-    public boolean save(User user)  throws Exception 
+    public User save()  throws Exception 
     {
-        isValidData(user);
-        userDao.save(user);
-        return true;
+        isValidCreateData();
+        return userDao.save();
     }
 
-    public boolean update(User user)   throws Exception 
+    public User update()   throws Exception 
     {
-        isValidUser(user);
-        userDao.update(user);
-        return true;
+        isValidUpdateData();
+        return userDao.update();
     }
 
-    public boolean delete(User user)   throws Exception 
+    public User delete()   throws Exception 
     {
-        isValidUser(user);
-        userDao.delete(user);
-        return true;
+        isValidValidUser();
+        return userDao.delete();
     }
 
-    public void isValidUser(User user)  throws Exception 
+    public void isValidUpdateData()  throws Exception 
+    {
+        isValidValidUser();
+
+        if(user.getAge().isBlank())     
+            throw new InvalidDataException("User age is blank");
+        else if(user.getName().isBlank())     
+            throw new InvalidDataException("User name is blank");
+    }
+
+    public void isValidCreateData()  throws Exception 
     {
         if(user.getId().isBlank())
             throw new InvalidDataException("User Id is blank");
-        else if(get(user.getId())==null)     
-            throw new InvalidDataException("User does not exists");
-    }
-
-    public void isValidData(User user)  throws Exception 
-    {
-        if(user.getId().isBlank())
-            throw new InvalidDataException("User Id is blank");
-        else if(get(user.getId())!=null)     
+        else if(userDao.exist())     
             throw new InvalidDataException("User already exists");
         else if(user.getAge().isBlank())     
             throw new InvalidDataException("User age is blank");
         else if(user.getName().isBlank())     
             throw new InvalidDataException("User name is blank");
+    }
+
+    public void isValidValidUser()  throws Exception 
+    {
+        if(user.getId().isBlank())
+            throw new InvalidDataException("User Id is blank");
+        else if(!userDao.exist())     
+            throw new InvalidDataException("User does not exists");
     }
  
 }
