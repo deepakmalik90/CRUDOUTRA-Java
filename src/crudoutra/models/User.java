@@ -47,4 +47,9 @@ public class User
     {
         return "{\"id\":"+getId()+",\"age\":"+getAge()+",\"name\":"+getName()+"}";
     }
+
+    public String toString(String customMessage)
+    {
+        return "[{\"id\":"+getId()+",\"age\":"+getAge()+",\"name\":"+getName()+"},{\"message\":"+ customMessage+"}]";
+    }
 }

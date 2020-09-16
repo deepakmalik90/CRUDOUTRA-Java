@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 import crudoutra.exceptions.*;
 
-public class Table 
+public class Data 
 {
     public ArrayList<HashMap<String,String>> rows   =   new ArrayList<HashMap<String,String>>();
     public HashMap<String,String> row       =   new HashMap<String,String>();
@@ -23,7 +23,7 @@ public class Table
     public int colsCount;
     private ResultSetMetaData rsmd;
 
-    public Table(ResultSet resultSet) throws DatabaseException 
+    public Data(ResultSet resultSet) throws DatabaseException 
     {
         try 
         {

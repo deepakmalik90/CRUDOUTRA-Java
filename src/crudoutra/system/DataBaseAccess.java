@@ -16,7 +16,7 @@ import java.sql.Statement;
 
 import crudoutra.exceptions.*;
 
-public class DB 
+public class DataBaseAccess 
 {
     private static String JDBC;
     private static String DB_URL;
@@ -25,13 +25,13 @@ public class DB
     private static Properties  dbProperties       =   new Properties();
 
     private Connection conn; 
-    private Table table;
+    private Data data;
     private ResultSet resultSet;
     private Statement statement;
 
 
 
-    public DB() throws DatabaseConnectionException
+    public DataBaseAccess() throws DatabaseConnectionException
     {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream dbPropertiesInputStream = classLoader.getResourceAsStream("db.properties");
@@ -55,8 +55,8 @@ public class DB
     {       
         try 
         {
-            Class.forName(DB.JDBC);
-            conn    =    DriverManager.getConnection(DB.DB_URL, DB.USER, DB.PASS); 
+            Class.forName(DataBaseAccess.JDBC);
+            conn    =    DriverManager.getConnection(DataBaseAccess.DB_URL, DataBaseAccess.USER, DataBaseAccess.PASS); 
         }
         catch(Exception e)
         {
@@ -76,14 +76,14 @@ public class DB
         }
     }
 
-    public Table query(String query) throws DatabaseException
+    public Data query(String query) throws DatabaseException
     {
         try 
         {
             statement   =   conn.createStatement();
             resultSet   =   statement.executeQuery(query);
-            table       =   new Table(resultSet);
-            return table;
+            data        =   new Data(resultSet);
+            return data;
         }
         catch(Exception e)
         {
