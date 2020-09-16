@@ -16,6 +16,7 @@ public class Route
     protected void setRoutes()
     {
         routes.put("/user", "crudoutra.controllers.UserController");
+        routes.put("/login", "crudoutra.controllers.LoginController");
     }
 }
 
