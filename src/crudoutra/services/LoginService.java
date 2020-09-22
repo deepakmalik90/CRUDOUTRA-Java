@@ -8,16 +8,26 @@
 package crudoutra.services;
 
 import crudoutra.exceptions.*;
+import crudoutra.dao.*;
+import crudoutra.models.*;
 
 public class LoginService 
 {
-    public LoginService() throws Exception
+    private LoginDao loginDao;
+    private User user;
+
+    public User login(String username, String password)  throws Exception 
     {
-    }
-   
-    public boolean login()  throws Exception 
-    {
-        throw new InvalidDataException("Not implemented yet");
+        loginDao            = new LoginDao();
+
+        if(username.isBlank())
+            throw new InvalidDataException("Username is blank");
+        else if(password.isBlank()) 
+            throw new InvalidDataException("Password is blank");
+        
+        user            =  loginDao.get(username,password);
+
+        return user;
     }
 
 }
