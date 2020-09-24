@@ -10,25 +10,22 @@ package crudoutra.models;
 public class User
 {
     private String id;
-    private String name;
     private String username;
-    private String email;
     private String password;
-    private String age;
 
     public String getId()
     {
         return id;
     }
 
-    public String getName()
+    public String getUserName()
     {
-        return name;
+        return username;
     }
 
-    public String getAge()
+    public String getPassword()
     {
-        return age;
+        return password;
     }
 
     public void setId(String id)
@@ -36,56 +33,27 @@ public class User
         this.id = id;
     }
 
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    public void setAge(String age)
-    {
-        this.age = age;
-    }
-
-    public String toString()
-    {
-        return "{\"id\":\""+getId()+"\",\"age\":\""+getAge()+"\",\"name\":\""+getName()+"\"}";
-    }
-
-    public String toString(String customMessage)
-    {
-        return "[{\"id\":\""+getId()+"\",\"age\":\""+getAge()+"\",\"name\":\""+getName()+"\"},{\"message\":\""+ customMessage+"\"}]";
-    }
-
-    public String getUsername() 
-    {
-        return username;
-    }
-
-    public void setUsername(String username) 
+    public void setUserName(String username)
     {
         this.username = username;
     }
 
-    public String getEmail() 
-    {
-        return email;
-    }
-
-    public void setEmail(String email) 
-    {
-        this.email = email;
-    }
-
-    public String getPassword() 
-    {
-        return password;
-    }
-
-    public void setPassword(String password) 
+    public void setPassword(String password)
     {
         this.password = password;
     }
 
+    public String toString()
+    {
+        return "{\"id\":\""+getId()+"\",\"password\":\""+getPassword()+"\",\"username\":\""+getUserName()+"\"}";
+    }
+
+    public String toString(String customMessage)
+    {
+        return "[{\"id\":\""+getId()+"\",\"password\":\""+getPassword()+"\",\"username\":\""+getUserName()+"\"},{\"message\":\""+ customMessage+"\"}]";
+    }
+
+   
     public int hashCode() 
     {
         final int prime = 31;

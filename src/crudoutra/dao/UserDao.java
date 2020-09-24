@@ -28,14 +28,14 @@ public class UserDao extends DataBaseAccess
         DataBaseAccess DB = new DataBaseAccess();
         ArrayList<User> users = new ArrayList<User>();
         DB.connect();
-        Data   data   =  DB.query("SELECT * FROM users");
+        Data   data   =  DB.query("SELECT * FROM USERS");
 
         for (HashMap<String,String> row : data.rows) 
         {
             User user = new User();
-            user.setId(row.get("id"));
-            user.setName(row.get("name"));
-            user.setAge(row.get("age"));
+            user.setId(row.get("ID"));
+            user.setUserName(row.get("USERNAME"));
+            user.setPassword(row.get("PASSWORD"));
             users.add(user);
         }
 
@@ -47,12 +47,12 @@ public class UserDao extends DataBaseAccess
     {
         String id   =   user.getId();
         connect();
-        Data   data   =   query("SELECT * FROM users WHERE \"id\"="+id);
+        Data   data   =   query("SELECT * FROM USERS WHERE ID="+id);
         HashMap<String,String> row    =   data.row;
         
-        user.setId(row.get("id"));
-        user.setName(row.get("name"));
-        user.setAge(row.get("age"));
+        user.setId(row.get("ID"));
+        user.setUserName(row.get("USERNAME"));
+        user.setPassword(row.get("PASSWORD"));
         
         close();      
         return user;
@@ -60,32 +60,31 @@ public class UserDao extends DataBaseAccess
 
     public User save() throws  Exception
     {
-        String id   =   user.getId();
-        String name =   user.getName();
-        String age  =   user.getAge();
+        String username =   user.getUserName();
+        String password  =   user.getPassword();
 
         connect();
-        excute("INSERT INTO users(\"id\",\"name\",\"age\") values("+id+",'"+name+"',"+age+")");
+        int id      =   excute("INSERT INTO USERS(NAME,PASSWORD) values('"+username+"',"+password+")");
         close();      
 
-        user.setId(id);
-        user.setName(name);
-        user.setAge(age);
+        user.setId(String.valueOf(id));
+        user.setUserName(username);
+        user.setPassword(password);
         return user;
     }
 
     public User update() throws  Exception
     {
         String id   =   user.getId();
-        String name =   user.getName();
-        String age  =   user.getAge();
+        String username =   user.getUserName();
+        String password  =   user.getPassword();
 
         connect();
-        excute("UPDATE users SET \"name\"='"+name+"', \"age\"="+age+" WHERE \"id\"="+id);
+        excute("UPDATE USERS SET USERNAME='"+username+"', PASSWORD="+password+" WHERE ID="+id);
         close();      
 
-        user.setName(name);
-        user.setAge(age);
+        user.setUserName(username);
+        user.setPassword(password);
         return user;
 
     }
@@ -95,7 +94,7 @@ public class UserDao extends DataBaseAccess
         String id   =   user.getId();
         
         connect();
-        excute("DELETE FROM users WHERE \"id\"="+id);
+        excute("DELETE FROM USERS WHERE ID="+id);
         close();      
 
         return user;
@@ -105,10 +104,10 @@ public class UserDao extends DataBaseAccess
     {
         String id   =   user.getId();
         connect();
-        Data   data   =   query("SELECT * FROM users WHERE \"id\"="+id);
+        Data   data   =   query("SELECT * FROM USERS WHERE ID="+id);
         HashMap<String,String> row    =   data.row;
         
-        if(row.containsKey("id") && !row.get("id").isBlank())
+        if(row.containsKey("ID") && !row.get("ID").isBlank())
             return true;
         else 
             return false;    

@@ -32,56 +32,43 @@ public class UserService
 
     public User get()  throws Exception 
     {
-        isValidValidUser();
+        isValidUser();
         return userDao.get();
     }
 
     public User save()  throws Exception 
     {
-        isValidCreateData();
+        isValidData();
         return userDao.save();
     }
 
     public User update()   throws Exception 
     {
-        isValidUpdateData();
+        isValidUser();
+        isValidData();
         return userDao.update();
     }
 
     public User delete()   throws Exception 
     {
-        isValidValidUser();
+        isValidUser();
         return userDao.delete();
     }
 
-    public void isValidUpdateData()  throws Exception 
-    {
-        isValidValidUser();
-
-        if(user.getAge().isBlank())     
-            throw new InvalidDataException("User age is blank");
-        else if(user.getName().isBlank())     
-            throw new InvalidDataException("User name is blank");
-    }
-
-    public void isValidCreateData()  throws Exception 
-    {
-        if(user.getId().isBlank())
-            throw new InvalidDataException("User Id is blank");
-        else if(userDao.exist())     
-            throw new InvalidDataException("User already exists");
-        else if(user.getAge().isBlank())     
-            throw new InvalidDataException("User age is blank");
-        else if(user.getName().isBlank())     
-            throw new InvalidDataException("User name is blank");
-    }
-
-    public void isValidValidUser()  throws Exception 
+    public void isValidUser()  throws Exception 
     {
         if(user.getId().isBlank())
             throw new InvalidDataException("User Id is blank");
         else if(!userDao.exist())     
             throw new InvalidDataException("User does not exists");
+    }
+
+    public void isValidData()  throws Exception 
+    {
+        if(user.getPassword().isBlank())     
+            throw new InvalidDataException("password is blank");
+        else if(user.getUserName().isBlank())     
+            throw new InvalidDataException("Username is blank");
     }
  
 }

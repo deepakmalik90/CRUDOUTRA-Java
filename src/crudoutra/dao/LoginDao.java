@@ -7,11 +7,10 @@
 
 package crudoutra.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import crudoutra.system.*;
-import crudoutra.exceptions.DatabaseConnectionException;
+import crudoutra.exceptions.*;
 import crudoutra.models.*;
 
 public class LoginDao extends DataBaseAccess 
@@ -27,14 +26,14 @@ public class LoginDao extends DataBaseAccess
     {
 
         connect();
-        Data   data   =   query("SELECT * FROM users WHERE \"username\"="+username +" and \"password\" = "+password);
+        Data   data   =   query("SELECT * FROM USERS WHERE USERNAME="+username +" and PASSWORD = "+password);
         HashMap<String,String> row    =   data.row;
         
         if(row.containsKey("id") && !row.get("id").isBlank())
         {
-            user.setId(row.get("id"));
-            user.setName(row.get("name"));
-            user.setAge(row.get("age"));
+            user.setId(row.get("ID"));
+            user.setUserName(row.get("USERNAME"));
+            user.setPassword(row.get("PASSWORD"));
         }    
     
         close();      

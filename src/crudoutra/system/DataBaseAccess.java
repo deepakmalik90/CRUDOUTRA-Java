@@ -96,7 +96,7 @@ public class DataBaseAccess
         try 
         {
             statement   =   conn.createStatement();
-            return statement.executeUpdate(query);
+            return statement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
         }
         catch(Exception e)
         {

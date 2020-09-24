@@ -28,15 +28,15 @@ public class UserController extends Controller
         else     
             user.setId("");
         
-        if(request.containsKey("age"))
-            user.setAge(request.get("age"));
+        if(request.containsKey("password"))
+            user.setPassword(request.get("password"));
         else     
-            user.setAge("");
+            user.setPassword("");
         
-        if(request.containsKey("name"))
-            user.setName(request.get("name"));
+        if(request.containsKey("username"))
+            user.setUserName(request.get("username"));
         else     
-            user.setName("");
+            user.setUserName("");
 
         userService         =       new UserService(user);
 
