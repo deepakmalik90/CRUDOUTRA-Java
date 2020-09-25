@@ -31,7 +31,8 @@ public class LoginDao extends DataBaseAccess
         connect();
         Data   data   =   query("SELECT * FROM USERS WHERE USERNAME='"+username +"' AND PASSWORD = '"+password+"'");
         HashMap<String,String> row    =   data.row;
-        if(row.containsKey("id") && !row.get("id").isBlank())
+
+        if(row.containsKey("ID") && !row.get("ID").isBlank())
         {
             user.setId(row.get("ID"));
             user.setUserName(row.get("USERNAME"));

@@ -56,7 +56,7 @@ public class User
     
     public String token()
     {
-        return "[{\"token\":\""+hashCode()+"\"}]";
+        return "{\"token\":\""+hashCode()+"\"}";
     }
    
     public int hashCode() 
