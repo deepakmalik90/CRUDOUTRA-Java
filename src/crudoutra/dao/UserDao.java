@@ -64,7 +64,7 @@ public class UserDao extends DataBaseAccess
         String password  =   user.getPassword();
 
         connect();
-        int id      =   excute("INSERT INTO USERS(NAME,PASSWORD) values('"+username+"',"+password+")");
+        int id      =   excute("INSERT INTO USERS(USERNAME,PASSWORD) values('"+username+"','"+password+"')");
         close();      
 
         user.setId(String.valueOf(id));
@@ -80,7 +80,7 @@ public class UserDao extends DataBaseAccess
         String password  =   user.getPassword();
 
         connect();
-        excute("UPDATE USERS SET USERNAME='"+username+"', PASSWORD="+password+" WHERE ID="+id);
+        excute("UPDATE USERS SET USERNAME='"+username+"', PASSWORD='"+password+"' WHERE ID="+id);
         close();      
 
         user.setUserName(username);

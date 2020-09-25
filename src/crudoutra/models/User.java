@@ -53,6 +53,11 @@ public class User
         return "[{\"id\":\""+getId()+"\",\"password\":\""+getPassword()+"\",\"username\":\""+getUserName()+"\"},{\"message\":\""+ customMessage+"\"}]";
     }
 
+    
+    public String token()
+    {
+        return "[{\"token\":\""+hashCode()+"\"}]";
+    }
    
     public int hashCode() 
     {

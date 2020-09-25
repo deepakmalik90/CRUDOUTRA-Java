@@ -17,32 +17,29 @@ import crudoutra.models.*;
 
 public class LoginController extends Controller
 {
-    private String username;
-    private String password;
-    
-    private LoginService loginService;
     private User user;
-
+    private LoginService loginService;
 
     public void setup(Map<String, String> request) throws Exception 
     {
-        
+        user                =       new User();    
+
         if(!request.containsKey("username"))
             throw new InvalidDataException("Username is blank");
         else 
-            username = request.get("username");
+            user.setUserName(request.get("username"));
         
-        if(!request.containsKey("pssword"))
+        if(!request.containsKey("password"))
             throw new InvalidDataException("password is blank");
         else 
-            password = request.get("password");
+            user.setPassword(request.get("password"));
 
-        loginService    =   new LoginService();
+        loginService    =   new LoginService(user);
     }
 
     public void post()  throws Exception
     {
-        user = loginService.login(username,password);
+        user = loginService.login();
 
         if (user.getId()=="") 
         {
@@ -50,8 +47,8 @@ public class LoginController extends Controller
         }
         else 
         {
-            String response =   String.valueOf(user.hashCode());
-            response(response);
+            String token = loginService.token();
+            response(token);
         }
     }    
 

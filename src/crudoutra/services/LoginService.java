@@ -16,18 +16,40 @@ public class LoginService
     private LoginDao loginDao;
     private User user;
 
-    public User login(String username, String password)  throws Exception 
+    public LoginService(User user) throws Exception
     {
-        loginDao            = new LoginDao();
+        this.user   = user;
+        loginDao     = new LoginDao(user);
+    }
 
-        if(username.isBlank())
-            throw new InvalidDataException("Username is blank");
-        else if(password.isBlank()) 
-            throw new InvalidDataException("Password is blank");
-        
-        user            =  loginDao.get(username,password);
-
+    public User login()  throws Exception 
+    {
+        isValidData();
+        user            =  loginDao.get();
         return user;
+    }
+
+    public String token()  throws Exception 
+    {
+        isValidUser();
+        String  token            =  loginDao.token();
+        return token;
+    }
+
+    public void isValidUser()  throws Exception 
+    {
+        if(user.getId().isBlank())
+            throw new InvalidDataException("User Id is blank");
+        else if(!loginDao.exist())     
+            throw new InvalidDataException("User does not exists");
+    }
+
+    public void isValidData()  throws Exception 
+    {
+        if(user.getPassword().isBlank())     
+            throw new InvalidDataException("password is blank");
+        else if(user.getUserName().isBlank())     
+            throw new InvalidDataException("Username is blank");
     }
 
 }
