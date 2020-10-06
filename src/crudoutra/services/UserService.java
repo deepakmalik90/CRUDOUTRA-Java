@@ -52,6 +52,7 @@ public class UserService
     public User delete()   throws Exception 
     {
         isValidUser();
+        fillUser();
         return userDao.delete();
     }
 
@@ -69,6 +70,11 @@ public class UserService
             throw new InvalidDataException("password is blank");
         else if(user.getUserName().isBlank())     
             throw new InvalidDataException("Username is blank");
+    }
+
+    public void fillUser()  throws Exception 
+    {
+        userDao.fill();
     }
  
 }

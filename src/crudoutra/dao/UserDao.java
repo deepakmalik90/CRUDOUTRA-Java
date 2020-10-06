@@ -92,12 +92,30 @@ public class UserDao extends DataBaseAccess
     public User delete() throws  Exception
     {
         String id   =   user.getId();
-        
+
         connect();
         excute("DELETE FROM USERS WHERE ID="+id);
         close();      
 
         return user;
+    }
+
+    public boolean fill() throws Exception
+    {
+        String id   =   user.getId();
+        connect();
+        Data   data   =   query("SELECT * FROM USERS WHERE ID="+id);
+        HashMap<String,String> row    =   data.row;
+        
+        if(row.containsKey("ID") && !row.get("ID").isBlank())
+        {
+            user.setUserName(row.get("USERNAME"));
+            user.setPassword(row.get("PASSWORD"));
+            return true;
+        }
+        else 
+            return false;    
+        
     }
 
     public boolean exist() throws Exception

@@ -95,8 +95,21 @@ public class DataBaseAccess
     {
         try 
         {
-            statement   =   conn.createStatement();
-            return statement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+            statement           =   conn.createStatement();
+            int affectedRows    =   statement.executeUpdate(query, new int[]{1});
+
+            if(affectedRows ==0)
+            {
+                return 0;
+            }
+
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) 
+            {
+                return Integer.parseInt(generatedKeys.getString(1));
+            }
+            else  
+                return 0;
         }
         catch(Exception e)
         {
