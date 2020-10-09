@@ -34,11 +34,14 @@ public class Route extends crudoutra.config.Route
 
     void processRoute() 
     {
-        if (routes.containsKey(path)) 
+        RouteConfig route = routes.stream().filter(r -> r.getName().equals(path))
+                    .findFirst().orElse(null);
+        if (route!=null)  
         {
             try 
             {
-                controller  =   (Controller) Class.forName(routes.get(path)).getDeclaredConstructor().newInstance();
+                Auth.authenticate(route);
+                controller  =   (Controller) Class.forName(route.getControllerPath()).getDeclaredConstructor().newInstance();
                 controller.init(httpServletRequest,httpServletResponse);
                 processMethod(controller);
             }

@@ -7,16 +7,18 @@
 
 package crudoutra.config;
 
-import java.util.HashMap;
+import java.util.*;
+
+import crudoutra.system.RouteConfig;
 
 public class Route 
 {
-    protected HashMap<String, String> routes = new HashMap<String, String>();
+    protected  List<RouteConfig> routes = new ArrayList<RouteConfig>();
 
     protected void setRoutes()
     {
-        routes.put("/user", "crudoutra.controllers.UserController");
-        routes.put("/login", "crudoutra.controllers.LoginController");
+        routes.add(new RouteConfig("/user", "crudoutra.controllers.UserController", false));
+        routes.add(new RouteConfig("/login", "crudoutra.controllers.LoginController", true));
     }
 }
 

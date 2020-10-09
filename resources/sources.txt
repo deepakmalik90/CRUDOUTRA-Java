@@ -4,6 +4,8 @@ src\crudoutra\config\Constant.java
 src\crudoutra\system\DataBaseAccess.java
 src\crudoutra\system\Helper.java
 src\crudoutra\system\Route.java
+src\crudoutra\system\RouteConfig.java
+src\crudoutra\system\Auth.java
 src\crudoutra\system\Error.java
 src\crudoutra\system\Controller.java
 src\crudoutra\system\Data.java

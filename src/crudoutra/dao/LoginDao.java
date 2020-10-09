@@ -68,6 +68,4 @@ public class LoginDao extends DataBaseAccess
             return false;    
         
     }
-
-    
 }
