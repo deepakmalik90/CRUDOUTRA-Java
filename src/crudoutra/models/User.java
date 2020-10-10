@@ -54,9 +54,9 @@ public class User
     }
 
     
-    public String token()
+    public String getToken()
     {
-        return "{\"token\":\""+hashCode()+"\"}";
+        return String.valueOf(hashCode());
     }
    
     public int hashCode() 

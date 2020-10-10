@@ -46,11 +46,10 @@ public class LoginDao extends DataBaseAccess
     public String genrateToken() throws  Exception
     {
         String id       =   user.getId();
-        String token    =   user.token();
-        String hasCode  =   String.valueOf(user.hashCode()) ;
+        String token    =   user.getToken();
 
         connect();
-        excute("INSERT INTO AUTH(USER_ID,TOKEN) values('"+id+"','"+hasCode+"')");
+        excute("INSERT INTO AUTH(USER_ID,TOKEN) values('"+id+"','"+token+"')");
         close();      
 
         return token;

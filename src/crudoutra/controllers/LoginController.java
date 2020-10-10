@@ -48,7 +48,7 @@ public class LoginController extends Controller
         else 
         {
             String token = loginService.getToken();
-            response(token);
+            response( "{\"token\":\""+token+"\"}");
         }
     }    
 

@@ -32,8 +32,19 @@ public class LoginService
     public String getToken()  throws Exception 
     {
         isValidUser();
-        String  token            =  loginDao.genrateToken();
-        return token;
+
+        user                =   verifyToken(user.getToken());
+        
+        if (user.isEmpty()) 
+        {
+            return loginDao.genrateToken();        
+        }
+        else 
+        {     
+            return user.getToken();
+        }
+
+
     }
 
     public User verifyToken(String token)  throws Exception 
