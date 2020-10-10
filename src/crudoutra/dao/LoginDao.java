@@ -47,9 +47,10 @@ public class LoginDao extends DataBaseAccess
     {
         String id       =   user.getId();
         String token    =   user.token();
+        String hasCode  =   String.valueOf(user.hashCode()) ;
 
         connect();
-        excute("INSERT INTO AUTH(USER_ID,TOKEN) values('"+id+"','"+token+"')");
+        excute("INSERT INTO AUTH(USER_ID,TOKEN) values('"+id+"','"+hasCode+"')");
         close();      
 
         return token;
