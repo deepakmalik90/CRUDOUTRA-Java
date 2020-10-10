@@ -20,9 +20,9 @@ public class Login extends Auth
 
         user                =   loginService.verifyToken(token);
         
-        if (user.getId().isBlank()) 
+        if (user.isEmpty()) 
         {
-            throw new InvalidDataException("Invalid Credentials");
+            throw new InvalidAccessException();
         }
     }
 }

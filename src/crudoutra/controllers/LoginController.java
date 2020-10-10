@@ -41,9 +41,9 @@ public class LoginController extends Controller
     {
         user = loginService.login();
 
-        if (user.getId().isBlank()) 
+        if (user.isEmpty()) 
         {
-            throw new InvalidDataException("Invalid Credentials");
+            throw new InvalidAuthException();
         }
         else 
         {

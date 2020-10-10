@@ -45,13 +45,21 @@ public class Route extends crudoutra.config.Route
                 controller.init(httpServletRequest,httpServletResponse);
                 processMethod(controller);
             }
-            catch(InvalidMethodException e) 
-            {
-                new Error(httpServletResponse).sendError(e,Constant.STATUS_405);
-            }
             catch(InvalidInputException e) 
             {
                 new Error(httpServletResponse).sendError(e,Constant.STATUS_400);
+            }
+            catch(InvalidAuthException e) 
+            {
+                new Error(httpServletResponse).sendError(e,Constant.STATUS_401);
+            }
+            catch(InvalidAccessException e) 
+            {
+                new Error(httpServletResponse).sendError(e,Constant.STATUS_403);
+            }
+            catch(InvalidMethodException e) 
+            {
+                new Error(httpServletResponse).sendError(e,Constant.STATUS_405);
             }
             catch(InvalidDataException e) 
             {

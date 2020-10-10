@@ -68,4 +68,16 @@ public class User
         result = prime * result + ((username == null) ? 0 : username.hashCode());
         return result;
     }
+
+    public boolean isEmpty()
+    {
+        if(id==null || id.isEmpty())
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+    }
 }
