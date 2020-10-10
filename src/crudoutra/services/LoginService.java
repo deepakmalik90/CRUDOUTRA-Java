@@ -29,11 +29,19 @@ public class LoginService
         return user;
     }
 
-    public String token()  throws Exception 
+    public String getToken()  throws Exception 
     {
         isValidUser();
-        String  token            =  loginDao.token();
+        String  token            =  loginDao.genrateToken();
         return token;
+    }
+
+    public User verifyToken(String token)  throws Exception 
+    {
+        String userID            =  loginDao.verifyToken(token);
+        user.setId(userID);
+        user            =  loginDao.get();
+        return user;
     }
 
     public void isValidUser()  throws Exception 

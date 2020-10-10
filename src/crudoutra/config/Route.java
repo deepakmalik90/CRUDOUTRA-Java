@@ -8,6 +8,7 @@
 package crudoutra.config;
 
 import java.util.*;
+import crudoutra.auth.*;
 
 import crudoutra.system.RouteConfig;
 
@@ -16,9 +17,9 @@ public class Route
     protected  List<RouteConfig> routes = new ArrayList<RouteConfig>();
 
     protected void setRoutes()
-    {
-        routes.add(new RouteConfig("/user", "crudoutra.controllers.UserController", false));
-        routes.add(new RouteConfig("/login", "crudoutra.controllers.LoginController", true));
+    { 
+        routes.add(new RouteConfig("/user", "crudoutra.controllers.UserController", new Login()));
+        routes.add(new RouteConfig("/login", "crudoutra.controllers.LoginController", new Default()));
     }
 }
 

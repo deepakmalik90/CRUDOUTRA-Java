@@ -4,13 +4,13 @@ public class RouteConfig
 {
     private String name;
     private String controllerPath;
-    private boolean isPublic;
+    private Auth auth;
 
-    public RouteConfig(String name, String controllerPath, boolean isPublic) 
+    public RouteConfig(String name, String controllerPath, Auth auth) 
     {
         this.name           =   name;
         this.controllerPath =   controllerPath;
-        this.isPublic      =   isPublic;
+        this.auth      =   auth;
     }
 
     public String getName() {
@@ -29,12 +29,12 @@ public class RouteConfig
         this.controllerPath = controllerPath;
     }
 
-    public boolean getIsPublic() {
-        return isPublic;
+    public Auth getAuth() {
+        return auth;
     }
 
-    public void setIsPublic(boolean isPublic) {
-        this.isPublic = isPublic;
+    public void setAuth(Auth auth) {
+        this.auth = auth;
     }
     
 }

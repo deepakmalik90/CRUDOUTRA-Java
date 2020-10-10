@@ -40,7 +40,7 @@ public class Route extends crudoutra.config.Route
         {
             try 
             {
-                Auth.authenticate(route);
+                route.getAuth().init(httpServletRequest,httpServletResponse);
                 controller  =   (Controller) Class.forName(route.getControllerPath()).getDeclaredConstructor().newInstance();
                 controller.init(httpServletRequest,httpServletResponse);
                 processMethod(controller);

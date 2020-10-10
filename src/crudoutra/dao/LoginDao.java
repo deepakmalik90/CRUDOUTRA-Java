@@ -43,7 +43,7 @@ public class LoginDao extends DataBaseAccess
         return user;
     }
 
-    public String token() throws  Exception
+    public String genrateToken() throws  Exception
     {
         String id       =   user.getId();
         String token    =   user.token();
@@ -54,6 +54,19 @@ public class LoginDao extends DataBaseAccess
 
         return token;
     }
+
+    public String verifyToken(String token) throws  Exception
+    {
+        connect();
+        Data   data   =   query("SELECT * FROM AUTH WHERE TOKEN='"+token+"'");
+        HashMap<String,String> row    =   data.row;
+             
+        if(row.containsKey("ID") && !row.get("ID").isBlank())
+            return row.get("USER_ID");
+        else 
+            return ""; 
+    }
+
 
     public boolean exist() throws Exception
     {

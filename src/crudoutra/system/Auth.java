@@ -1,12 +1,25 @@
 package crudoutra.system;
 
-public class Auth 
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public abstract class Auth 
 {
-    public static void authenticate(RouteConfig route)
+    protected HttpServletRequest httpServletRequest;
+    protected HttpServletResponse httpServletResponse;
+
+    protected String path;
+    protected String method;
+
+    public void init(HttpServletRequest request, HttpServletResponse response) throws Exception
     {
-        if(!route.getIsPublic())
-        {
-            // Code to validate token
-        }
-    }    
+        httpServletRequest  =   request;
+        httpServletResponse =   response;
+        path                =   request.getServletPath();
+        method              =   request.getMethod();
+        this.check();
+    }
+
+    public abstract void check() throws Exception;
 }
